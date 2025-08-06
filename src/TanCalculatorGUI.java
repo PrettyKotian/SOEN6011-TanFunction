@@ -1,17 +1,14 @@
-package TanFunctionCalculator;
+package TanCalculator;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JComboBox;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class TanCalculatorGUI extends JFrame {
 
@@ -36,49 +33,40 @@ public class TanCalculatorGUI extends JFrame {
         inputPanel.add(unitBox);
         add(inputPanel);
 
-        final JPanel controlPanel = new JPanel();
-        final JButton computeButton = new JButton("Compute");
+        final JPanel computePanel = new JPanel();
+        final JButton computeButton = new JButton("Compute tan(x)");
+        computeButton.addActionListener(e -> computeTan());
+        computePanel.add(computeButton);
+        add(computePanel);
+
+        final JPanel resetPanel = new JPanel();
         final JButton resetButton = new JButton("Reset");
+        resetButton.addActionListener(e -> {
+            inputField.setText("");
+            resultLabel.setText("");
+        });
+        resetPanel.add(resetButton);
+        add(resetPanel);
+
+        final JPanel exitPanel = new JPanel();
         final JButton exitButton = new JButton("Exit");
+        exitButton.addActionListener(e -> System.exit(0));
+        exitPanel.add(exitButton);
+        add(exitPanel);
 
-        computeButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                computeTan();
-            }
-        });
-
-        resetButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                inputField.setText("");
-                resultLabel.setText("");
-            }
-        });
-
-        exitButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-            }
-        });
-
-        controlPanel.add(computeButton);
-        controlPanel.add(resetButton);
-        controlPanel.add(exitButton);
-        add(controlPanel);
-
-        final JPanel resultPanel = new JPanel();
-        resultLabel = new JLabel("");
-        resultPanel.add(resultLabel);
-        add(resultPanel);
+        resultLabel = new JLabel("", SwingConstants.CENTER);
+        add(resultLabel);
     }
 
     private void computeTan() {
         try {
             double input = Double.parseDouble(inputField.getText());
-            String unit = (String) unitBox.getSelectedItem();
+            final String unit = (String) unitBox.getSelectedItem();
             if ("Degrees".equals(unit)) {
                 input = Math.toRadians(input);
             }
-            double result = Math.tan(input);
+
+            final double result = Math.tan(input);
             resultLabel.setText("tan(x) = " + result);
         } catch (NumberFormatException e) {
             resultLabel.setText("Invalid input.");
@@ -86,7 +74,7 @@ public class TanCalculatorGUI extends JFrame {
     }
 
     public static void main(String[] args) {
-        TanCalculatorGUI calculator = new TanCalculatorGUI();
+        final TanCalculatorGUI calculator = new TanCalculatorGUI();
         calculator.setVisible(true);
     }
 }
