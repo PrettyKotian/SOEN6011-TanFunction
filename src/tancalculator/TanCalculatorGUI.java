@@ -4,14 +4,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 
 /**
  * GUI application to compute tan(x).
@@ -84,16 +77,12 @@ public class TanCalculatorGUI extends JFrame {
     private void computeTan() {
         try {
             final double originalInput = Double.parseDouble(inputField.getText());
-            double input = originalInput;
             final String unit = (String) unitBox.getSelectedItem();
+            final boolean isDegrees = "Degrees".equals(unit);
 
             logger.log(Level.INFO, () -> String.format("Input received: %.6f", originalInput));
 
-            if ("Degrees".equals(unit)) {
-                input = Math.toRadians(input);
-            }
-
-            final double result = Math.tan(input);
+            double result = calculateTan(originalInput, isDegrees);
             resultLabel.setText(String.format("tan(x) = %.6f", result));
 
             logger.log(Level.INFO, () -> String.format("Computed tan(x): %.6f", result));
@@ -101,6 +90,20 @@ public class TanCalculatorGUI extends JFrame {
             resultLabel.setText("Invalid input.");
             logger.log(Level.WARNING, "Invalid input entered.");
         }
+    }
+
+    /**
+     * Static method to calculate tan(x) for testing.
+     *
+     * @param value     input x value
+     * @param isDegrees true if the input is in degrees
+     * @return computed tan(x)
+     */
+    public static double calculateTan(double value, boolean isDegrees) {
+        if (isDegrees) {
+            value = Math.toRadians(value);
+        }
+        return Math.tan(value);
     }
 
     /**
