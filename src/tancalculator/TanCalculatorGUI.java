@@ -18,6 +18,9 @@ import javax.swing.SwingUtilities;
  */
 public class TanCalculatorGUI extends JFrame {
 
+    /** Semantic Version (MAJOR.MINOR.PATCH). Bump before each release/tag. */
+    public static final String APP_VERSION = "1.0.0";
+
     private static final Logger logger = Logger.getLogger(TanCalculatorGUI.class.getName());
 
     private final JTextField inputField;
@@ -28,7 +31,8 @@ public class TanCalculatorGUI extends JFrame {
      * Constructor to set up the GUI components.
      */
     public TanCalculatorGUI() {
-        setTitle("tan(x) Calculator");
+        // show version in title
+        setTitle("tan(x) Calculator v" + APP_VERSION);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(400, 250);
         setLayout(new GridLayout(6, 1)); // 6 rows needed
@@ -78,6 +82,11 @@ public class TanCalculatorGUI extends JFrame {
         add(exitPanel);
     }
 
+    /** Returns the current application version (SemVer). */
+    public static String getVersion() {
+        return APP_VERSION;
+    }
+
     /**
      * Method to compute tan(x) based on input and unit.
      */
@@ -122,7 +131,7 @@ public class TanCalculatorGUI extends JFrame {
         SwingUtilities.invokeLater(() -> {
             final TanCalculatorGUI calculator = new TanCalculatorGUI();
             calculator.setVisible(true);
-            logger.log(Level.INFO, "Application started and GUI launched.");
+            logger.log(Level.INFO, "Application started and GUI launched. Version: {0}", APP_VERSION);
         });
     }
 }
