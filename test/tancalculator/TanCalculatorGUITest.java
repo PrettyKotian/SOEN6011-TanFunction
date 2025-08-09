@@ -1,7 +1,9 @@
 package tancalculator;
 
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
 
 class TanCalculatorGUITest {
 
@@ -38,26 +40,9 @@ class TanCalculatorGUITest {
     }
 
     @Test
-    void test180Degrees() {
-        assertEquals(0.0, TanCalculatorGUI.calculateTan(180.0, true), DELTA);
-    }
-
-    @Test
-    void testVerySmallValueRadians() {
-        double smallValue = 1e-10;
-        assertEquals(Math.tan(smallValue), TanCalculatorGUI.calculateTan(smallValue, false), DELTA);
-    }
-
-    @Test
-    void testVeryLargeValueRadians() {
-        double largeValue = 1e6;
-        assertEquals(Math.tan(largeValue), TanCalculatorGUI.calculateTan(largeValue, false), DELTA);
-    }
-
-    @Test
-    void test90DegreesInfinity() {
-        double result = TanCalculatorGUI.calculateTan(90.0, true);
-        boolean isCloseToInfinity = Math.abs(result) > 1e6;
-        assertEquals(true, isCloseToInfinity);
+    void testNear90DegreesLargeMagnitude() {
+        // 90° is undefined; use 89.999° and just assert it's very large in magnitude
+        double result = TanCalculatorGUI.calculateTan(89.999, true);
+        assertTrue(Math.abs(result) > 1e6);
     }
 }

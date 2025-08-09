@@ -4,7 +4,14 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 
 /**
  * GUI application to compute tan(x).
@@ -82,7 +89,7 @@ public class TanCalculatorGUI extends JFrame {
 
             logger.log(Level.INFO, () -> String.format("Input received: %.6f", originalInput));
 
-            double result = calculateTan(originalInput, isDegrees);
+            final double result = calculateTan(originalInput, isDegrees);
             resultLabel.setText(String.format("tan(x) = %.6f", result));
 
             logger.log(Level.INFO, () -> String.format("Computed tan(x): %.6f", result));
