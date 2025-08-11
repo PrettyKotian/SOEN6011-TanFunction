@@ -90,7 +90,7 @@ public final class TanCalculatorGUI extends JFrame {
         gc.weightx = 1.0;
 
         // Row 0: label + input + unit selector
-        final JLabel inputLabel = new JLabel("x:");
+        final JLabel inputLabel = new JLabel("Enter the value x:");
         inputLabel.setFont(new Font(FONT_FAMILY, Font.PLAIN, LABEL_SIZE));
         gc.gridx = 0;
         gc.gridy = 0;
@@ -199,7 +199,7 @@ public final class TanCalculatorGUI extends JFrame {
 
             // Undefined checks first (your requested behavior).
             if (isUndefinedTan(raw, inDegrees)) {
-                resultLabel.setText("tan(x) = undefined");
+                resultLabel.setText("tan(x) is undefined at " + raw);
                 if (LOGGER.isLoggable(Level.INFO)) {
                     LOGGER.log(Level.INFO, "Result: undefined (multiple of 90°/π/2).");
                 }
