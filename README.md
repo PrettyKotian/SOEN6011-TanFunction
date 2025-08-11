@@ -178,5 +178,7 @@ java -cp bin tancalculator.Main
 | **Cleared Input** | ![GUI – cleared input](screenshot/gui-example-input-cleared.jpeg) |
 
 ---
+
 ## 🌐 Repository
+
 [SOEN6011-TanFunction GitHub Repo](https://github.com/PrettyKotian/SOEN6011-TanFunction)
